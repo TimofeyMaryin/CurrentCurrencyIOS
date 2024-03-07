@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "appsflyerframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework",
+      "state" : {
+        "revision" : "8de517bea1ee8d0b5a80d3118ba3cdd3a555d94e",
+        "version" : "6.13.0"
+      }
+    },
+    {
+      "identity" : "onesignal-xcframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OneSignal/OneSignal-XCFramework",
+      "state" : {
+        "revision" : "75accf0bdd3e42984c8788363b6b4821d0834078",
+        "version" : "5.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}
