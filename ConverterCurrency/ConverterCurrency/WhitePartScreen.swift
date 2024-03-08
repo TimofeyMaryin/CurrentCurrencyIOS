@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 struct WhitePartScreen : View {
+    
     var body: some View {
+        
         TabView {
             FirstFragment()
                 .tabItem {

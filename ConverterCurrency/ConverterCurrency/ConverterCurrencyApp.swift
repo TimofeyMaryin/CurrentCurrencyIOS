@@ -19,6 +19,7 @@ func logError(message: String) {
 }
 
 
+
 @main
 struct ConverterCurrencyApp: App {
     
@@ -37,6 +38,7 @@ struct ConverterCurrencyApp: App {
 }
 
 
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     // Добавьте следующую переменную экземпляра AppsFlyerTracker в класс AppDelegate
     var appsFlyerTracker: AppsFlyerLib?
@@ -46,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Инициализация AppsFlyer с ключом приложения
         appsFlyerTracker = AppsFlyerLib.shared()
         appsFlyerTracker?.appsFlyerDevKey = "FVS24b72a7nVw7ZimgMj5H"
-        appsFlyerTracker?.appleAppID = "YOUR_APPLE_APP_ID"
+        appsFlyerTracker?.appleAppID = "6478958292"
         appsFlyerTracker?.isDebug = true
         
         logError(message: "application Init Apps")
