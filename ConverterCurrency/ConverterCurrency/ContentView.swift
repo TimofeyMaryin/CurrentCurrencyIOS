@@ -22,7 +22,7 @@ struct ContentView: View {
     
     
     var body: some View {
-        // WhitePartScreen().background(Color.blue)
+//        WhitePartScreen().background(Color.blue)
         // https://portal-investion.ru
         if checkPush() {
             
@@ -62,6 +62,7 @@ private func checkPush() -> Bool {
 //    guard let checkAirMode = statusBarSubviews?.contains(where: { $0.classForCoder == NSClassFromString("UIStatusBarAirplaneModeItemView") }) else { return false }
 //    
 //    logError(message: Locale.current.languageCode ?? "Def Value")
+    logError(message: Locale.current.languageCode!)
     return Locale.current.languageCode == "ru"
-    // return false
+
 }

@@ -9,23 +9,23 @@ import Foundation
 import SwiftUI
 
 private var currencyModel = [
-    SelectCurrencyModel(name: "Фунт £"),
-    SelectCurrencyModel(name: "Лира ₺"),
+    SelectCurrencyModel(name: "Pound £"),
+    SelectCurrencyModel(name: "Lyra ₺"),
     SelectCurrencyModel(name: "Евро €"),
-    SelectCurrencyModel(name: "Лари GEL"),
-    SelectCurrencyModel(name: "Рубль ₽"),
-    SelectCurrencyModel(name: "Доллар $"),
-    SelectCurrencyModel(name: "Дирхам د.إ")
+    SelectCurrencyModel(name: "Euro GEL"),
+    SelectCurrencyModel(name: "Ruble ₽"),
+    SelectCurrencyModel(name: "Dolar $"),
+    SelectCurrencyModel(name: "Dirhem د.إ")
 ]
 
 private var currencyModel2 = [
-    SelectCurrencyModel(name: "Фунт £"),
-    SelectCurrencyModel(name: "Лира ₺"),
-    SelectCurrencyModel(name: "Евро €"),
-    SelectCurrencyModel(name: "Лари GEL"),
-    SelectCurrencyModel(name: "Рубль ₽"),
-    SelectCurrencyModel(name: "Доллар $"),
-    SelectCurrencyModel(name: "Дирхам د.إ")
+    SelectCurrencyModel(name: "Pound £"),
+    SelectCurrencyModel(name: "Lyra ₺"),
+    SelectCurrencyModel(name: "Euro €"),
+    SelectCurrencyModel(name: "Larry GEL"),
+    SelectCurrencyModel(name: "Ruble ₽"),
+    SelectCurrencyModel(name: "Dolar $"),
+    SelectCurrencyModel(name: "Dirhem د.إ")
 ]
 
 
@@ -46,7 +46,7 @@ struct SecondFragment : View {
         NavigationView {
             
             ScrollView {
-                Text("Выберите валюту, которую хотите конвертировать")
+                Text("Dönüştürmek istediğiniz para birimini seçin")
                     .bold()
                     .multilineTextAlignment(.center)
                     .padding([.vertical], 20)
@@ -65,7 +65,7 @@ struct SecondFragment : View {
                 }
         
                 
-                Text("Выберите валюту, на которую хотите конвертировать")
+                Text("Dönüştürmek istediğiniz para birimini seçin")
                     .bold()
                     .multilineTextAlignment(.center)
                     .padding()
@@ -89,7 +89,7 @@ struct SecondFragment : View {
                         ConverterAdditionalFragment(currency: calculateCurrency(currencyIndex1: allCurencyModelState1, currencyIndex2: allCurencyModelState2))
                     }
                 ) {
-                    Text("Преобразовать")
+                    Text("Dönüştür")
                         .padding([.horizontal], 100)
                         .padding([.vertical], 20)
                         .foregroundColor(.white)
@@ -98,7 +98,7 @@ struct SecondFragment : View {
                 }
                 
             }
-            .navigationTitle("Конвертер")
+            .navigationTitle("Dönüştürücü")
         }
     }
 }

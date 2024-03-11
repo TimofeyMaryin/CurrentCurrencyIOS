@@ -31,7 +31,7 @@ struct AdditionalFragment : View {
                 .font(.headline)
             Spacer()
             
-            TextField("Write here...", text: $textField)
+            TextField("Buraya yaz...", text: $textField)
                 .padding(.horizontal, 20)
                 .keyboardType(.numberPad)
                 .onReceive(Just(textField)) { newValue in
@@ -41,7 +41,7 @@ struct AdditionalFragment : View {
                                 }
                             }
             Spacer()
-            Text("You Get a \(calculateCurrency(value: textField, currencyPrice: model.pricePerOneDollad))")
+            Text("Sen bir \(calculateCurrency(value: textField, currencyPrice: model.pricePerOneDollad))")
             Spacer()
             Button(action: {
                 UIPasteboard.general.string = String(calculateCurrency(value: textField, currencyPrice: model.pricePerOneDollad))

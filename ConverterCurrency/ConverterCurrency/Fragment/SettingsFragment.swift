@@ -17,23 +17,23 @@ private struct SettingsItem {
 }
 
 private var allSettingsItem = [
-    SettingsItem(title: "Оценить приложение", ic: "star.fill", onClicK: {
-        if let url = URL(string: "https://apps.apple.com/ru/app/ConverterCurrency/ru.ios-project.ConverterCurrency") {
+    SettingsItem(title: "Uygulamayı değerlendirin", ic: "star.fill", onClicK: {
+        if let url = URL(string: "https://apps.apple.com/ru/app/ConverterCurrency/ru.ios-project.SimpleConverterCurrency") {
             UIApplication.shared.open(url)
         }
     }),
-    SettingsItem(title: "Политика конфедициальности", ic: "doc.fill", onClicK: {
-        if let url = URL(string: "https://apps.apple.com/ru/app/ConverterCurrency/ru.ios-project.ConverterCurrency") {
+    SettingsItem(title: "Gizlilik politikası", ic: "doc.fill", onClicK: {
+        if let url = URL(string: "https://apps.apple.com/ru/app/ConverterCurrency/ru.ios-project.SimpleConverterCurrency") {
                UIApplication.shared.open(url)
             }
     }),
-    SettingsItem(title: "Условия использования", ic: "person.fill", onClicK: {
-        if let url = URL(string: "https://apps.apple.com/ru/app/ConverterCurrency/ru.ios-project.ConverterCurrency") {
+    SettingsItem(title: "Kullanım Koşulları", ic: "person.fill", onClicK: {
+        if let url = URL(string: "https://apps.apple.com/ru/app/ConverterCurrency/ru.ios-project.SimpleConverterCurrency") {
                UIApplication.shared.open(url)
             }
     } ),
-    SettingsItem(title: "Связаться с нами", ic: "mail.fill", onClicK: {}),
-    SettingsItem(title: "Поделиться", ic: "square.and.arrow.up.fill", onClicK: {})
+    SettingsItem(title: "Bize ulaşın", ic: "mail.fill", onClicK: {}),
+    SettingsItem(title: "Paylaş", ic: "square.and.arrow.up.fill", onClicK: {})
 ]
 
 
@@ -62,14 +62,14 @@ struct SettingsFragment : View {
                             }
                     })
                     .sheet(isPresented: $isShowingShareSheet) {
-                        ShareSheet(activityItems: ["Поделиться своей находкой"]) // Замените "Текст для публикации" на свой собственный контент
+                        ShareSheet(activityItems: ["Bulduklarınızı paylaşın"]) // Замените "Текст для публикации" на свой собственный контент
                     }
 
                     .padding([.vertical], 20)
                 }
             }
             
-            .navigationTitle("Настройки")
+            .navigationTitle("Ayarlar")
         }
     }
 }

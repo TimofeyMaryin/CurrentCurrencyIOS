@@ -41,7 +41,7 @@ struct FirstFragment : View {
                         .padding()
                     }
                 }
-                .navigationTitle("Main")
+                .navigationTitle("Ana")
                 .background(Color.black)
                 
             }

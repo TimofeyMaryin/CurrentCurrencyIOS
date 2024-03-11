@@ -12,7 +12,7 @@ import os.log
 import OneSignalFramework
 
 
-let log = OSLog(subsystem: "ru.ios-project.ConverterCurrency", category: "Error")
+let log = OSLog(subsystem: "ru.ios-project.SimpleConverterCurrency", category: "Error")
 
 func logError(message: String) {
     os_log("%@", log: log, type: .error, message)

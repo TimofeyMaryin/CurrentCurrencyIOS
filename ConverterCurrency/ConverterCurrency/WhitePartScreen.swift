@@ -17,21 +17,21 @@ struct WhitePartScreen : View {
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
-                        Text("Главная")
+                        Text("Ana")
                     }
                 }
             SecondFragment()
                 .tabItem {
                     VStack {
                         Image(systemName: "dollarsign.arrow.circlepath")
-                        Text("Конвертер")
+                        Text("Dönüştürücü")
                     }
                 }
             SettingsFragment()
                 .tabItem {
                     VStack {
                         Image(systemName: "gear")
-                        Text("Настройки")
+                        Text("Ayarlar")
                     }
                 }
         }

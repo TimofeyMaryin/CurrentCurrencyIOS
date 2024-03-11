@@ -13,7 +13,7 @@ struct ConverterAdditionalFragment : View {
     var currency: [Float]
     var body: some View {
         if currency.count != 3 {
-            Text("Please full filling the Form")
+            Text("Lütfen Formu Eksiksiz Doldurunuz")
         } else {
             __Content(currency: currency[1])
         }
@@ -121,7 +121,7 @@ private struct __Content : View {
                 }
             )
         }
-        .toast(toastView: Toast(dataModel: ToastDataModel(title: "Copied to Clipboard", image: "checkmark"), show: $showToast), show: $showToast)
+        .toast(toastView: Toast(dataModel: ToastDataModel(title: "Panoya Kopyalandı", image: "checkmark"), show: $showToast), show: $showToast)
     
     }
     
@@ -167,7 +167,7 @@ private struct __Header: View {
                 showToast.toggle()
             }
         }
-        .toast(toastView: Toast(dataModel: ToastDataModel(title: "Copied to Clipboard", image: "checkmark"), show: $showToast), show: $showToast)
+        .toast(toastView: Toast(dataModel: ToastDataModel(title: "Panoya opied", image: "checkmark"), show: $showToast), show: $showToast)
         
     }
     
