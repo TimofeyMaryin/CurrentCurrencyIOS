@@ -24,15 +24,16 @@ struct ContentView: View {
     var body: some View {
 //        WhitePartScreen().background(Color.blue)
         // https://portal-investion.ru
-        if checkPush() {
-            
-            WebView(url: URL(string: "https://portal-investion.ru")!)
-            
-        } else {
-            
-            WhitePartScreen()
-                .background(Color.blue)
-        }
+        WhitePartScreen().background(Color.white)
+//        if checkPush() {
+//            
+//            WebView(url: URL(string: "https://portal-investion.ru")!)
+//            
+//        } else {
+//            
+//            WhitePartScreen()
+//                .background(Color.blue)
+//        }
         
     }
     

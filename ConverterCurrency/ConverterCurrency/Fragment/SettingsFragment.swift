@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 
+
 private struct SettingsItem {
     var title: String
     var ic: String
@@ -32,7 +33,7 @@ private var allSettingsItem = [
                UIApplication.shared.open(url)
             }
     } ),
-    SettingsItem(title: "Bize ulaşın", ic: "mail.fill", onClicK: {}),
+
     SettingsItem(title: "Paylaş", ic: "square.and.arrow.up.fill", onClicK: {})
 ]
 

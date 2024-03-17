@@ -15,6 +15,7 @@ struct CurrencyModel : Identifiable {
     var currencyCurrency: String
     var currencyCurrencyPerDollad: Float
     var currenyIcon: String
+    var currencyNameShort: String
 }
 
 struct CurrencyCard : View {

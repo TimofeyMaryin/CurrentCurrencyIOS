@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 
 struct ConverterAdditionalFragment : View {
     var currency: [Float]
+    
     var body: some View {
         if currency.count != 3 {
             Text("Lütfen Formu Eksiksiz Doldurunuz")
@@ -34,94 +35,110 @@ private struct __Content : View {
     ]
  
     var body: some View {
-        ScrollView {
-            LazyVGrid(
-                columns: columns,
-                alignment: .center,
-                content: {
-                    Section(
-                        header: __Header(countValue: value, currency: currency)
-                    ) {
-                        ForEach(1..<10) { index in
-                            Button(
-                                action: {
-                                    if value.count <= 8 {
-                                        value += String(index)
-                                    }
-                                },
-                                label: {
-                                    Text("\(index)")
-                                        .padding(40)
-                                        .foregroundColor(.white)
-                                        .background(Color.blue)
-                                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-                                    }
-                            )
+        
+        VStack {
+            HStack(content: {
+                Spacer()
+                if value.isEmpty {
+                    Text("0")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                } else {
+                    Text(value)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                    .frame(width: 50)
+                
+            })
+            HStack(content: {
+                Spacer()
+                Text("Converted: \(currency * (Float(value) ?? 0))")
+                    .foregroundColor(.black)
+                    .fontWeight(.semibold)
+                    .font(.title2)
+                Spacer()
+                    .frame(width: 50)
+            })
+            
+            HStack(content: {
+                AdditionalFragmentButton(
+                    value: "1",
+                    onClick: { value += "1" }
+                )
+                AdditionalFragmentButton(
+                    value: "2",
+                    onClick: { value += "2" }
+                )
+                AdditionalFragmentButton(
+                    value: "3",
+                    onClick: { value += "3" }
+                )
+            })
+            HStack(content: {
+                AdditionalFragmentButton(
+                    value: "4",
+                    onClick: { value += "4" }
+                )
+                AdditionalFragmentButton(
+                    value: "5",
+                    onClick: { value += "5" }
+                )
+                AdditionalFragmentButton(
+                    value: "6",
+                    onClick: { value += "6" }
+                )
+            })
+            HStack(content: {
+                AdditionalFragmentButton(
+                    value: "7",
+                    onClick: { value += "7" }
+                )
+                AdditionalFragmentButton(
+                    value: "8",
+                    onClick: { value += "8" }
+                )
+                AdditionalFragmentButton(
+                    value: "9",
+                    onClick: { value += "9" }
+                )
+            })
+            HStack(content: {
+                AdditionalFragmentButton(
+                    value: "<-",
+                    onClick: {
+                        if !value.isEmpty {
+                            value.removeLast()
                         }
-                    }
-                }
-            )
-            LazyVGrid(
-                columns: [
-                    GridItem(.fixed(100), spacing: 16),
-                    GridItem(.fixed(100), spacing: 16),
-                    GridItem(.fixed(100), spacing: 16)
-                ],
-                alignment: .center,
-                content: {
-                    Section {
-                        Button(
-                            action: {
-                                if value.count <= 8 {
-                                    value += "0"
-                                }
-                            },
-                            label: {
-                                Text("0")
-                                    .padding([.vertical], 40)
-                                    .padding([.horizontal], 40)
-                                    .foregroundColor(.white)
-                                    .background(Color.blue)
-                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-                                }
-                        )
                         
-                        Button(
-                            action: {
-                                if !value.isEmpty {
-                                    value.removeLast()
-                                }
-                            },
-                            label: {
-                                Image(systemName: "delete.left.fill")
-                                    .padding(40)
-                                    .foregroundColor(.white)
-                                    .background(Color.blue)
-                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-                                }
-                        )
-                        
-                        Button(
-                            action: {
-                                withAnimation {
-                                    showToast.toggle()
-                                }
-                                UIPasteboard.general.string = "\(currency * (Float(value) ?? 0))"
-                            },
-                            label: {
-                                Image(systemName: "doc.on.doc.fill")
-                                    .padding(40)
-                                    .foregroundColor(.white)
-                                    .background(Color.blue)
-                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-                                }
-                        )
                     }
-                    
-                }
-            )
-        }
-        .toast(toastView: Toast(dataModel: ToastDataModel(title: "Panoya Kopyalandı", image: "checkmark"), show: $showToast), show: $showToast)
+                )
+                
+                AdditionalFragmentButton(
+                    value: "0",
+                    onClick: {
+                        if !value.isEmpty {
+                            value += "0"
+                        }
+                        
+                    }
+                )
+                
+                AdditionalFragmentButton(
+                    value: "Cop",
+                    onClick: {
+                        withAnimation {
+                            showToast.toggle()
+                        }
+                        UIPasteboard.general.string = "\(currency * (Float(value) ?? 0))"
+                        
+                    }
+                )
+            })
+        }.toast(toastView: Toast(dataModel: ToastDataModel(title: "Panoya opied", image: "checkmark"), show: $showToast), show: $showToast)
     
     }
     
@@ -173,4 +190,93 @@ private struct __Header: View {
     
 }
 
+
+//ScrollView {
+//    LazyVGrid(
+//        columns: columns,
+//        alignment: .center,
+//        content: {
+//            Section(
+//                header: __Header(countValue: value, currency: currency)
+//            ) {
+//                ForEach(1..<10) { index in
+//                    Button(
+//                        action: {
+//                            if value.count <= 8 {
+//                                value += String(index)
+//                            }
+//                        },
+//                        label: {
+//                            Text("\(index)")
+//                                .padding(40)
+//                                .foregroundColor(.white)
+//                                .background(Color.blue)
+//                                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+//                            }
+//                    )
+//                }
+//            }
+//        }
+//    )
+//    LazyVGrid(
+//        columns: [
+//            GridItem(.fixed(100), spacing: 16),
+//            GridItem(.fixed(100), spacing: 16),
+//            GridItem(.fixed(100), spacing: 16)
+//        ],
+//        alignment: .center,
+//        content: {
+//            Section {
+//                Button(
+//                    action: {
+//                        if value.count <= 8 {
+//                            value += "0"
+//                        }
+//                    },
+//                    label: {
+//                        Text("0")
+//                            .padding([.vertical], 40)
+//                            .padding([.horizontal], 40)
+//                            .foregroundColor(.white)
+//                            .background(Color.blue)
+//                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+//                        }
+//                )
+//                
+//                Button(
+//                    action: {
+//                        if !value.isEmpty {
+//                            value.removeLast()
+//                        }
+//                    },
+//                    label: {
+//                        Image(systemName: "delete.left.fill")
+//                            .padding(40)
+//                            .foregroundColor(.white)
+//                            .background(Color.blue)
+//                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+//                        }
+//                )
+//                
+//                Button(
+//                    action: {
+//                        withAnimation {
+//                            showToast.toggle()
+//                        }
+//                        UIPasteboard.general.string = "\(currency * (Float(value) ?? 0))"
+//                    },
+//                    label: {
+//                        Image(systemName: "doc.on.doc.fill")
+//                            .padding(40)
+//                            .foregroundColor(.white)
+//                            .background(Color.blue)
+//                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+//                        }
+//                )
+//            }
+//            
+//        }
+//    )
+//}
+//.toast(toastView: Toast(dataModel: ToastDataModel(title: "Panoya Kopyalandı", image: "checkmark"), show: $showToast), show: $showToast)
 

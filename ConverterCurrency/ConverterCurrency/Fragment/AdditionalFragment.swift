@@ -16,6 +16,7 @@ struct AdditionalFragmetModel {
     var image: String
     var pricePerOneDollad: Float
     var currencyIcon: String
+    var currencyShortName: String
 }
 
 struct AdditionalFragment : View {
@@ -24,37 +25,113 @@ struct AdditionalFragment : View {
     
     
     var body: some View {
-        VStack {
-            Image(model.image).resizable().frame(width: 150, height: 150).clipShape(Circle())
-            Spacer()
-            Text("\(String(model.pricePerOneDollad))\(model.currencyIcon) = 1$")
-                .font(.headline)
-            Spacer()
-            
-            TextField("Buraya yaz...", text: $textField)
-                .padding(.horizontal, 20)
-                .keyboardType(.numberPad)
-                .onReceive(Just(textField)) { newValue in
-                                let filtered = newValue.filter { "0123456789".contains($0) }
-                                if filtered != newValue {
-                                    self.textField = filtered
+        NavigationView(
+            content: {
+                VStack {
+                    HStack(
+                        content: {
+                            Text(model.currencyShortName)
+                                .foregroundColor(.black.opacity(0.7))
+                                .font(.largeTitle)
+                                .fontWeight(.semibold)
+                            
+                            Text(textField)
+                                .foregroundColor(.black)
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                        }
+                    )
+                    
+                    HStack(content: {
+                        AdditionalFragmentButton(
+                            value: "1",
+                            onClick: { textField += "1" }
+                        )
+                        AdditionalFragmentButton(
+                            value: "2",
+                            onClick: { textField += "2" }
+                        )
+                        AdditionalFragmentButton(
+                            value: "3",
+                            onClick: { textField += "3" }
+                        )
+                    })
+                    HStack(content: {
+                        AdditionalFragmentButton(
+                            value: "4",
+                            onClick: { textField += "4" }
+                        )
+                        AdditionalFragmentButton(
+                            value: "5",
+                            onClick: { textField += "5" }
+                        )
+                        AdditionalFragmentButton(
+                            value: "6",
+                            onClick: { textField += "6" }
+                        )
+                    })
+                    HStack(content: {
+                        AdditionalFragmentButton(
+                            value: "7",
+                            onClick: { textField += "7" }
+                        )
+                        AdditionalFragmentButton(
+                            value: "8",
+                            onClick: { textField += "8" }
+                        )
+                        AdditionalFragmentButton(
+                            value: "9",
+                            onClick: { textField += "9" }
+                        )
+                    })
+                    HStack(content: {
+                        AdditionalFragmentButton(
+                            value: "<-",
+                            onClick: {
+                                if !textField.isEmpty {
+                                    textField.removeLast()
                                 }
+                                
                             }
-            Spacer()
-            Text("Sen bir \(calculateCurrency(value: textField, currencyPrice: model.pricePerOneDollad))")
-            Spacer()
-            Button(action: {
-                UIPasteboard.general.string = String(calculateCurrency(value: textField, currencyPrice: model.pricePerOneDollad))
-                UIPasteboard.general.setValue(
-                    calculateCurrency(value: textField, currencyPrice: model.pricePerOneDollad),
-                    forPasteboardType: UTType.plainText.identifier
-                )
-            }, label: {
-                Image(systemName: "doc.on.doc.fill")
-            })
-            Spacer()
-            Spacer()
-        }
+                        )
+                        
+                        AdditionalFragmentButton(
+                            value: "0",
+                            onClick: {
+                                if !textField.isEmpty {
+                                    textField += "0"
+                                }
+                                
+                            }
+                        )
+                        
+                        AdditionalFragmentButton(
+                            value: "Del",
+                            onClick: {
+                                if !textField.isEmpty {
+                                    textField = ""
+                                }
+                                
+                            }
+                        )
+                    })
+                    
+                    NavigationLink {
+                        if !textField.isEmpty {
+                            AdditionalResultFragment(value: textField, model: model)
+                        }
+                        
+                    } label: {
+                        Text("Continue")
+                            .foregroundColor(Color.black)
+                            .frame(width: 140, height: 60)
+                            .background(Color.green)
+                            .cornerRadius(10)
+                    }
+                }
+            }
+        )
+
     }
 }
 
@@ -77,3 +154,18 @@ extension String {
     }
 }
 
+struct AdditionalFragmentButton : View {
+    var value: String
+    var onClick: () -> Void
+    
+    var body: some View {
+        Text(value)
+            .frame(width: 70, height: 70)
+            .background(Color.green.opacity(0.6))
+            .clipShape(Circle())
+            .onTapGesture {
+                onClick()
+            }
+            .padding(10)
+    }
+}

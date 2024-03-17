@@ -10,6 +10,7 @@ import AppsFlyerLib
 import UIKit
 import os.log
 import OneSignalFramework
+import Combine
 
 
 let log = OSLog(subsystem: "ru.ios-project.SimpleConverterCurrency", category: "Error")
@@ -22,7 +23,11 @@ func logError(message: String) {
 
 @main
 struct ConverterCurrencyApp: App {
-    
+    @State private var data: [Item] = []
+    private let url = URL(string: "https://apps.catoftree.com/api/app?identify=trade-trainer")!
+    @State private var cancellable: AnyCancellable?
+
+
     // @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     // var appsFlyerTracker: AppsFlyerLib?
@@ -31,10 +36,28 @@ struct ConverterCurrencyApp: App {
 
     var body: some Scene {
         
+
         WindowGroup {
             ContentView()
+                .onAppear(perform: {
+                    logError(message: "Hello World")
+                    
+                   fetchData()
+                })
         }
     }
+    
+    private func fetchData() {
+        cancellable = URLSession.shared.dataTaskPublisher(for: url)
+                .map { $0.data }
+                .decode(type: [Item].self, decoder: JSONDecoder())
+                .replaceError(with: [])
+                .receive(on: DispatchQueue.main)
+                .assign(to: \.data, on: self)
+        
+        print(cancellable ?? "Error")
+    }
+    
 }
 
 
@@ -86,4 +109,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+}
+
+
+struct Item: Codable, Identifiable {
+    let id: Int
+    let name: String
 }
