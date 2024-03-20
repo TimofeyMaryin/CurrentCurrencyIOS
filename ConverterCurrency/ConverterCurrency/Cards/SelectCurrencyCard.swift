@@ -12,6 +12,7 @@ import SwiftUI
 struct SelectCurrencyModel : Identifiable {
     let id = UUID()
     let name: String
+    let img: String
 }
 
 struct SelectCurrencyCard : View {
@@ -28,6 +29,9 @@ struct SelectCurrencyCard : View {
                 HStack(
                     alignment: .center
                 ) {
+                    Image(model.img)
+                        .resizable()
+                        .frame(width: 20, height: 20)
                     Text(model.name)
                     Spacer(minLength: 1)
                     if (selected) {

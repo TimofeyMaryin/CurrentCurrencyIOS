@@ -9,35 +9,33 @@ import Foundation
 import SwiftUI
 
 private var currencyModel = [
-    SelectCurrencyModel(name: "Pound £"),
-    SelectCurrencyModel(name: "Lyra ₺"),
-    SelectCurrencyModel(name: "Евро €"),
-    SelectCurrencyModel(name: "Euro GEL"),
-    SelectCurrencyModel(name: "Ruble ₽"),
-    SelectCurrencyModel(name: "Dolar $"),
-    SelectCurrencyModel(name: "Dirhem د.إ")
+    SelectCurrencyModel(name: "Pound £", img: "currency_1"),
+    SelectCurrencyModel(name: "Lyra ₺", img: "currency_2"),
+    SelectCurrencyModel(name: "Евро €", img: "currency_3"),
+    SelectCurrencyModel(name: "Euro GEL", img: "currency_4"),
+    SelectCurrencyModel(name: "Ruble ₽", img: "currency_5"),
+    SelectCurrencyModel(name: "Dolar $", img: "currency_6"),
+    SelectCurrencyModel(name: "Dirhem د.إ", img: "currency_7")
 ]
 
 private var currencyModel2 = [
-    SelectCurrencyModel(name: "Pound £"),
-    SelectCurrencyModel(name: "Lyra ₺"),
-    SelectCurrencyModel(name: "Euro €"),
-    SelectCurrencyModel(name: "Larry GEL"),
-    SelectCurrencyModel(name: "Ruble ₽"),
-    SelectCurrencyModel(name: "Dolar $"),
-    SelectCurrencyModel(name: "Dirhem د.إ")
+    SelectCurrencyModel(name: "Pound £", img: "currency_1"),
+    SelectCurrencyModel(name: "Lyra ₺", img: "currency_2"),
+    SelectCurrencyModel(name: "Евро €", img: "currency_3"),
+    SelectCurrencyModel(name: "Euro GEL", img: "currency_4"),
+    SelectCurrencyModel(name: "Ruble ₽", img: "currency_5"),
+    SelectCurrencyModel(name: "Dolar $", img: "currency_6"),
+    SelectCurrencyModel(name: "Dirhem د.إ", img: "currency_7"),
 ]
 
 
 
 struct SecondFragment : View {
     
-    @State var allCurencyModelState1 = [
-        false, false, false, false, false, false, false
-    ]
-    @State var allCurencyModelState2 = [
-        false, false, false, false, false, false, false
-    ]
+    @State var allCurencyModelState1 = [ false, false, false, false, false, false, false ]
+    @State var allCurencyModelState2 = [ false, false, false, false, false, false, false ]
+    
+    @State var name: String = ""
     
     
     @ViewBuilder
@@ -58,6 +56,7 @@ struct SecondFragment : View {
                             model: currencyModel[model],
                             selected: allCurencyModelState1[model]
                         ) {
+                            
                             allCurencyModelState1 = selectCurrency(id: model, stateList: allCurencyModelState1)
                             
                         }
@@ -86,7 +85,7 @@ struct SecondFragment : View {
                 
                 NavigationLink(
                     destination: {
-                        ConverterAdditionalFragment(currency: calculateCurrency(currencyIndex1: allCurencyModelState1, currencyIndex2: allCurencyModelState2))
+                        ConverterAdditionalFragment(currency: calculateCurrency(currencyIndex1: allCurencyModelState1, currencyIndex2: allCurencyModelState2), name: name)
                     }
                 ) {
                     Text("Dönüştür")

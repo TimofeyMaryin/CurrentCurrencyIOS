@@ -23,6 +23,9 @@ struct AdditionalFragment : View {
     var model: AdditionalFragmetModel
     @State var textField = ""
     
+    @State var showToast = false
+    
+    let width: CGFloat = 85
     
     var body: some View {
         NavigationView(
@@ -30,58 +33,118 @@ struct AdditionalFragment : View {
                 VStack {
                     HStack(
                         content: {
+                            Spacer()
                             Text(model.currencyShortName)
                                 .foregroundColor(.black.opacity(0.7))
                                 .font(.largeTitle)
                                 .fontWeight(.semibold)
                             
-                            Text(textField)
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
+                            if textField.count != 0 {
+                                Text(textField)
+                                    .foregroundColor(.black)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                            } else {
+                                Text("0")
+                                    .foregroundColor(.black)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer().frame(width: width)
                         }
                     )
+                    HStack(content: {
+                        Spacer()
+                        Text("Converted: ")
+                        Text("\((Float(textField) ?? 0.0) * model.pricePerOneDollad)")
+                        Spacer().frame(width: width)
+                    })
                     
                     HStack(content: {
                         AdditionalFragmentButton(
                             value: "1",
-                            onClick: { textField += "1" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "1"
+                                }
+                                
+                            }
                         )
                         AdditionalFragmentButton(
                             value: "2",
-                            onClick: { textField += "2" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "2"
+                                }
+                                
+                            }
                         )
                         AdditionalFragmentButton(
                             value: "3",
-                            onClick: { textField += "3" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "3"
+                                }
+                                
+                            }
                         )
                     })
                     HStack(content: {
                         AdditionalFragmentButton(
                             value: "4",
-                            onClick: { textField += "4" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "4"
+                                }
+                                
+                            }
                         )
                         AdditionalFragmentButton(
                             value: "5",
-                            onClick: { textField += "5" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "5"
+                                }
+                                
+                            }
                         )
                         AdditionalFragmentButton(
                             value: "6",
-                            onClick: { textField += "6" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "6"
+                                }
+                            }
                         )
                     })
                     HStack(content: {
                         AdditionalFragmentButton(
                             value: "7",
-                            onClick: { textField += "7" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "7"
+                                }
+                                
+                            }
                         )
                         AdditionalFragmentButton(
                             value: "8",
-                            onClick: { textField += "8" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "8"
+                                }
+                                
+                            }
                         )
                         AdditionalFragmentButton(
                             value: "9",
-                            onClick: { textField += "9" }
+                            onClick: {
+                                if isMaxValue(value: textField) {
+                                    textField += "9"
+                                }
+                                
+                            }
                         )
                     })
                     HStack(content: {
@@ -98,7 +161,7 @@ struct AdditionalFragment : View {
                         AdditionalFragmentButton(
                             value: "0",
                             onClick: {
-                                if !textField.isEmpty {
+                                if !textField.isEmpty && isMaxValue(value: textField){
                                     textField += "0"
                                 }
                                 
@@ -106,31 +169,33 @@ struct AdditionalFragment : View {
                         )
                         
                         AdditionalFragmentButton(
-                            value: "Del",
+                            value: "Cop",
                             onClick: {
-                                if !textField.isEmpty {
-                                    textField = ""
+                                withAnimation {
+                                    showToast.toggle()
                                 }
+                                UIPasteboard.general.string = "\(model.pricePerOneDollad * (Float(textField) ?? 0))"
                                 
                             }
                         )
                     })
                     
-                    NavigationLink {
-                        if !textField.isEmpty {
-                            AdditionalResultFragment(value: textField, model: model)
-                        }
-                        
-                    } label: {
-                        Text("Continue")
-                            .foregroundColor(Color.black)
-                            .frame(width: 140, height: 60)
-                            .background(Color.green)
-                            .cornerRadius(10)
-                    }
+//                    NavigationLink {
+//                        if !textField.isEmpty {
+//                            AdditionalResultFragment(value: textField, model: model)
+//                        }
+//                        
+//                    } label: {
+//                        Text("Continue")
+//                            .foregroundColor(Color.black)
+//                            .frame(width: 140, height: 60)
+//                            .background(Color.green)
+//                            .cornerRadius(10)
+//                    }
                 }
             }
         )
+        .toast(toastView: Toast(dataModel: ToastDataModel(title: "Panoya opied", image: "checkmark"), show: $showToast), show: $showToast)
 
     }
 }
@@ -143,6 +208,14 @@ private func setValue(valuee: String) -> Float  {
 private func calculateCurrency(value: String, currencyPrice: Float) -> Float  {
     
     return setValue(valuee: value) * currencyPrice
+}
+
+private func isMaxValue(value: String) -> Bool {
+    if value.count <= 8 {
+        return true
+    } else {
+        return false
+    }
 }
 
 

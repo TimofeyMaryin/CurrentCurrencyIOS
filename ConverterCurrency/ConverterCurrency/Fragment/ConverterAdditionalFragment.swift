@@ -11,12 +11,13 @@ import UniformTypeIdentifiers
 
 struct ConverterAdditionalFragment : View {
     var currency: [Float]
+    var name: String
     
     var body: some View {
         if currency.count != 3 {
             Text("Lütfen Formu Eksiksiz Doldurunuz")
         } else {
-            __Content(currency: currency[1])
+            __Content(currency: currency[1], name: name)
         }
         
     }
@@ -25,9 +26,13 @@ struct ConverterAdditionalFragment : View {
 
 private struct __Content : View {
     var currency: Float
+    var name: String
+    
     @State var value = ""
     @State var __test = false
     @State var showToast = false
+    
+    
     let columns: [GridItem] = [
         GridItem(.fixed(100), spacing: 16),
         GridItem(.fixed(100), spacing: 16),
@@ -45,23 +50,21 @@ private struct __Content : View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 } else {
-                    Text(value)
+                    Text("\(value)")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 }
                 Spacer()
-                    .frame(width: 50)
+                    .frame(width: 85)
                 
             })
             HStack(content: {
                 Spacer()
                 Text("Converted: \(currency * (Float(value) ?? 0))")
-                    .foregroundColor(.black)
-                    .fontWeight(.semibold)
-                    .font(.title2)
+                    
                 Spacer()
-                    .frame(width: 50)
+                    .frame(width: 85)
             })
             
             HStack(content: {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04AC0A052BAB2B6F00933ADA /* TestNavigationStackFragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC0A042BAB2B6F00933ADA /* TestNavigationStackFragment.swift */; };
 		04B23EBB2B8511C40035AB70 /* ConverterCurrencyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23EBA2B8511C40035AB70 /* ConverterCurrencyApp.swift */; };
 		04B23EBD2B8511C40035AB70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23EBC2B8511C40035AB70 /* ContentView.swift */; };
 		04B23EBF2B8511C50035AB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B23EBE2B8511C50035AB70 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04AC0A042BAB2B6F00933ADA /* TestNavigationStackFragment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNavigationStackFragment.swift; sourceTree = "<group>"; };
 		04B23EB72B8511C40035AB70 /* ConverterCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConverterCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B23EBA2B8511C40035AB70 /* ConverterCurrencyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterCurrencyApp.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		04B23EBC2B8511C40035AB70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04AC0A032BAB2B5C00933ADA /* TestFeatch */ = {
+			isa = PBXGroup;
+			children = (
+				04AC0A042BAB2B6F00933ADA /* TestNavigationStackFragment.swift */,
+			);
+			path = TestFeatch;
+			sourceTree = "<group>";
+		};
 		04B23EAE2B8511C40035AB70 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		04B23EB92B8511C40035AB70 /* ConverterCurrency */ = {
 			isa = PBXGroup;
 			children = (
+				04AC0A032BAB2B5C00933ADA /* TestFeatch */,
 				04B23EF12B8776790035AB70 /* ConverterCurrency.entitlements */,
 				04B23EDA2B8513B10035AB70 /* Fragment */,
 				04B23ED42B8513450035AB70 /* Cards */,
@@ -255,6 +266,7 @@
 			files = (
 				04B23ED92B85137A0035AB70 /* SelectCurrencyCard.swift in Sources */,
 				04B23ECA2B8512AF0035AB70 /* ToastDataModel.swift in Sources */,
+				04AC0A052BAB2B6F00933ADA /* TestNavigationStackFragment.swift in Sources */,
 				04B23ECC2B8512C20035AB70 /* Toast.swift in Sources */,
 				04B23EBD2B8511C40035AB70 /* ContentView.swift in Sources */,
 				04B23EE72B85150D0035AB70 /* WhitePartScreen.swift in Sources */,
