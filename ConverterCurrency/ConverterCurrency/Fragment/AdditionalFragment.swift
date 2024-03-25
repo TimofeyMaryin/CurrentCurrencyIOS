@@ -174,24 +174,11 @@ struct AdditionalFragment : View {
                                 withAnimation {
                                     showToast.toggle()
                                 }
-                                UIPasteboard.general.string = "\(model.pricePerOneDollad * (Float(textField) ?? 0))"
+                                UIPasteboard.general.string = "\((Float(textField) ?? 0.0) * model.pricePerOneDollad)"
                                 
                             }
                         )
                     })
-                    
-//                    NavigationLink {
-//                        if !textField.isEmpty {
-//                            AdditionalResultFragment(value: textField, model: model)
-//                        }
-//                        
-//                    } label: {
-//                        Text("Continue")
-//                            .foregroundColor(Color.black)
-//                            .frame(width: 140, height: 60)
-//                            .background(Color.green)
-//                            .cornerRadius(10)
-//                    }
                 }
             }
         )

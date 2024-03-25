@@ -10,14 +10,16 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct ConverterAdditionalFragment : View {
-    var currency: [Float]
-    var name: String
+
+    
+    var model1: CurrencyModel?
+    var model2: CurrencyModel?
     
     var body: some View {
-        if currency.count != 3 {
+        if model1 == nil || model2 == nil {
             Text("Lütfen Formu Eksiksiz Doldurunuz")
         } else {
-            __Content(currency: currency[1], name: name)
+            __Content(model1: model1!, model2: model2!)
         }
         
     }
@@ -25,12 +27,16 @@ struct ConverterAdditionalFragment : View {
 
 
 private struct __Content : View {
-    var currency: Float
-    var name: String
+    
+    var model1: CurrencyModel
+    var model2: CurrencyModel
     
     @State var value = ""
     @State var __test = false
     @State var showToast = false
+    
+    let width: CGFloat = 85
+    
     
     
     let columns: [GridItem] = [
@@ -42,31 +48,39 @@ private struct __Content : View {
     var body: some View {
         
         VStack {
-            HStack(content: {
-                Spacer()
-                if value.isEmpty {
-                    Text("0")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                } else {
-                    Text("\(value)")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                }
-                Spacer()
-                    .frame(width: 85)
-                
-            })
-            HStack(content: {
-                Spacer()
-                Text("Converted: \(currency * (Float(value) ?? 0))")
+            HStack(
+                content: {
+                    Spacer()
+                    Text(model1.currencyNameShort)
+                        .foregroundColor(.black.opacity(0.7))
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
                     
+                    if value.count != 0 {
+                        Text(value)
+                            .foregroundColor(.black)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                    } else {
+                        Text("0")
+                            .foregroundColor(.black)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                    }
+                    
+                    Spacer().frame(width: width)
+                }
+            )
+            HStack(content: {
                 Spacer()
-                    .frame(width: 85)
+                Text("Converted: ")
+                Text("\((Float(value) ?? 0.0) / model1.currencyCurrencyPerDollad * model2.currencyCurrencyPerDollad)")
+                    .fontWeight(.semibold)
+                Text(" \(model2.currencyNameShort)")
+                Spacer().frame(width: width)
             })
-            
+            // --
+
             HStack(content: {
                 AdditionalFragmentButton(
                     value: "1",
@@ -136,7 +150,7 @@ private struct __Content : View {
                         withAnimation {
                             showToast.toggle()
                         }
-                        UIPasteboard.general.string = "\(currency * (Float(value) ?? 0))"
+                        UIPasteboard.general.string = "\((Float(value) ?? 0.0) / model1.currencyCurrencyPerDollad * model2.currencyCurrencyPerDollad)"
                         
                     }
                 )
@@ -192,94 +206,4 @@ private struct __Header: View {
     }
     
 }
-
-
-//ScrollView {
-//    LazyVGrid(
-//        columns: columns,
-//        alignment: .center,
-//        content: {
-//            Section(
-//                header: __Header(countValue: value, currency: currency)
-//            ) {
-//                ForEach(1..<10) { index in
-//                    Button(
-//                        action: {
-//                            if value.count <= 8 {
-//                                value += String(index)
-//                            }
-//                        },
-//                        label: {
-//                            Text("\(index)")
-//                                .padding(40)
-//                                .foregroundColor(.white)
-//                                .background(Color.blue)
-//                                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-//                            }
-//                    )
-//                }
-//            }
-//        }
-//    )
-//    LazyVGrid(
-//        columns: [
-//            GridItem(.fixed(100), spacing: 16),
-//            GridItem(.fixed(100), spacing: 16),
-//            GridItem(.fixed(100), spacing: 16)
-//        ],
-//        alignment: .center,
-//        content: {
-//            Section {
-//                Button(
-//                    action: {
-//                        if value.count <= 8 {
-//                            value += "0"
-//                        }
-//                    },
-//                    label: {
-//                        Text("0")
-//                            .padding([.vertical], 40)
-//                            .padding([.horizontal], 40)
-//                            .foregroundColor(.white)
-//                            .background(Color.blue)
-//                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-//                        }
-//                )
-//                
-//                Button(
-//                    action: {
-//                        if !value.isEmpty {
-//                            value.removeLast()
-//                        }
-//                    },
-//                    label: {
-//                        Image(systemName: "delete.left.fill")
-//                            .padding(40)
-//                            .foregroundColor(.white)
-//                            .background(Color.blue)
-//                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-//                        }
-//                )
-//                
-//                Button(
-//                    action: {
-//                        withAnimation {
-//                            showToast.toggle()
-//                        }
-//                        UIPasteboard.general.string = "\(currency * (Float(value) ?? 0))"
-//                    },
-//                    label: {
-//                        Image(systemName: "doc.on.doc.fill")
-//                            .padding(40)
-//                            .foregroundColor(.white)
-//                            .background(Color.blue)
-//                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
-//                        }
-//                )
-//            }
-//            
-//        }
-//    )
-//}
-//.toast(toastView: Toast(dataModel: ToastDataModel(title: "Panoya Kopyalandı", image: "checkmark"), show: $showToast), show: $showToast)
 

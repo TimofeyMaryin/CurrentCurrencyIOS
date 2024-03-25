@@ -16,6 +16,7 @@ struct CurrencyModel : Identifiable {
     var currencyCurrencyPerDollad: Float
     var currenyIcon: String
     var currencyNameShort: String
+    var currencyFullName: String
 }
 
 struct CurrencyCard : View {
@@ -28,12 +29,18 @@ struct CurrencyCard : View {
                 model.currencyImage
             )
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
-                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                .cornerRadius(10)
                 .padding([.horizontal], 20)
+                .shadow(color: .black, radius: 3)
             
             Text("\(model.currencyCurrency)")
                 .bold()
+            
+            Text(" (\(model.currencyFullName))")
+                .bold()
+                .foregroundColor(.gray)
             
         }
     }

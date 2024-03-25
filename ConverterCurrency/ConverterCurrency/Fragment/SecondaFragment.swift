@@ -32,8 +32,11 @@ private var currencyModel2 = [
 
 struct SecondFragment : View {
     
-    @State var allCurencyModelState1 = [ false, false, false, false, false, false, false ]
-    @State var allCurencyModelState2 = [ false, false, false, false, false, false, false ]
+    @State var allCurencyModelState1 = [ false, false, false, false, false, false, false, false, false, false ]
+    @State var allCurencyModelState2 = [ false, false, false, false, false, false, false, false, false, false ]
+    
+    @State var model1: CurrencyModel? = nil
+    @State var model2: CurrencyModel? = nil
     
     @State var name: String = ""
     
@@ -45,18 +48,18 @@ struct SecondFragment : View {
             
             ScrollView {
                 Text("Dönüştürmek istediğiniz para birimini seçin")
-                    .bold()
+                    .font(.title2)
                     .multilineTextAlignment(.center)
                     .padding([.vertical], 20)
                 
                 Spacer()
                 VStack {
-                    ForEach(currencyModel.indices, id: \.self) { model in
+                    ForEach(models.indices, id: \.self) { model in
                         SelectCurrencyCard(
-                            model: currencyModel[model],
+                            model: models[model],
                             selected: allCurencyModelState1[model]
                         ) {
-                            
+                            model1 = models[model]
                             allCurencyModelState1 = selectCurrency(id: model, stateList: allCurencyModelState1)
                             
                         }
@@ -65,16 +68,17 @@ struct SecondFragment : View {
         
                 
                 Text("Dönüştürmek istediğiniz para birimini seçin")
-                    .bold()
+                    .font(.title2)
                     .multilineTextAlignment(.center)
                     .padding()
                     
                 VStack {
-                    ForEach(currencyModel2.indices, id: \.self) { model in
+                    ForEach(models.indices, id: \.self) { model in
                         SelectCurrencyCard(
-                            model: currencyModel2[model],
+                            model: models[model],
                             selected: allCurencyModelState2[model]
                         ) {
+                            model2 = models[model]
                             allCurencyModelState2 = selectCurrency(id: model, stateList: allCurencyModelState2)
                             
                         }
@@ -85,7 +89,8 @@ struct SecondFragment : View {
                 
                 NavigationLink(
                     destination: {
-                        ConverterAdditionalFragment(currency: calculateCurrency(currencyIndex1: allCurencyModelState1, currencyIndex2: allCurencyModelState2), name: name)
+                        ConverterAdditionalFragment(model1: model1, model2: model2)
+                        // ConverterAdditionalFragment(currency: calculateCurrency(currencyIndex1: allCurencyModelState1, currencyIndex2: allCurencyModelState2), name: name)
                     }
                 ) {
                     Text("Dönüştür")
