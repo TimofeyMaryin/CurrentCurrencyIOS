@@ -85,8 +85,7 @@ struct WebView: UIViewRepresentable {
 
 
 private func checkPush() -> Bool {
-    logError(message: Locale.current.languageCode!)
-    return Locale.current.languageCode == "tr"
+    return Locale.current.language.languageCode?.identifier == "tr"
 
 }
 
