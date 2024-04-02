@@ -71,8 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Инициализация AppsFlyer с ключом приложения
         appsFlyerTracker = AppsFlyerLib.shared()
         appsFlyerTracker?.appsFlyerDevKey = "FVS24b72a7nVw7ZimgMj5H"
-        appsFlyerTracker?.appleAppID = "6478958292"
+        appsFlyerTracker?.appleAppID = "6479308685" // 6479308685
         appsFlyerTracker?.isDebug = true
+        appsFlyerTracker?.start()
         
         logError(message: "application Init Apps")
         
